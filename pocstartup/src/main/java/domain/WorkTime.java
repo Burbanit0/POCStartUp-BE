@@ -12,4 +12,9 @@ public class WorkTime {
 	@Id
 	@GeneratedValue
 	private Long id;
+	
+	private Long duration;
+	
+	
+	private Project project;
 }

@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,7 +25,7 @@ public class User {
 	private String lastname;
 	private String role;
 	
-	@ManyToMany(mappedBy="user",fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="user")
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	private Set<WorkTime> workTimes;
@@ -33,4 +34,6 @@ public class User {
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	private Set<Project> projects;
+
+
 }

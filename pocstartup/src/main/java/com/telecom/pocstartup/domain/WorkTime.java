@@ -1,10 +1,9 @@
-package domain;
+package com.telecom.pocstartup.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import lombok.Data;
 
@@ -19,4 +18,7 @@ public class WorkTime {
 	
 	@ManyToOne
 	private Project project;
+	
+	@ManyToOne
+	private User user;
 }

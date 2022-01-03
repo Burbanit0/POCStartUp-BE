@@ -1,5 +1,6 @@
-package domain;
+package com.telecom.pocstartup.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -21,8 +22,12 @@ public class Project {
 	
 	private String name;
 	
-	@ManyToMany(mappedBy="project",fetch=FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.EAGER)
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	private Set<User> users;
+	
+	public Project() {
+		this.users = new HashSet<>();
+	}
 }

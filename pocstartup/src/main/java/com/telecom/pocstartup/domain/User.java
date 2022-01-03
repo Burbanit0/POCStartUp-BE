@@ -1,5 +1,6 @@
-package domain;
+package com.telecom.pocstartup.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -7,7 +8,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -25,15 +28,34 @@ public class User {
 	private String lastname;
 	private String role;
 	
+	@OneToOne
+	private Credential credential;
+	
 	@OneToMany(mappedBy="user")
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	private Set<WorkTime> workTimes;
 	
-	@ManyToMany(mappedBy="user",fetch=FetchType.EAGER)
+	@ManyToOne
+	private GroupUser groupUser;
+	
+	@ManyToMany(mappedBy="users",fetch=FetchType.EAGER)
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	private Set<Project> projects;
 
-
+	public User() {
+		this.workTimes = new HashSet<>();
+		this.projects = new HashSet<>();
+	}
+	
+	public void addProject(Project project) {
+		project.getUsers().add(this);
+		this.projects.add(project);
+	}
+	
+	public void addWorkTime(WorkTime workTime) {
+		workTime.setUser(this);
+		this.workTimes.add(workTime);
+	}
 }

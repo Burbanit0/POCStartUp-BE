@@ -1,4 +1,4 @@
-package domain;
+package com.telecom.pocstartup.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,9 +15,5 @@ public class Credential {
 	private Long id;
 	
 	private String password;
-	
-	@OneToOne
-	private User user;
-	
-	
+		
 }

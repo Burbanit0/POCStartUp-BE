@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -25,6 +28,7 @@ public class Project {
 	
 	@EqualsAndHashCode.Exclude
 	@ManyToMany(mappedBy = "projects",fetch=FetchType.EAGER)
+	@JsonIgnore
 	private Set<User> users;
 	
 	public Project() {

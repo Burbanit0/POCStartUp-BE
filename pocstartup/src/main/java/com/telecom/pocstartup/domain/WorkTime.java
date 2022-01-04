@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Data;
 
 @Data
@@ -17,8 +19,10 @@ public class WorkTime {
 	private Long duration;
 	
 	@ManyToOne
+	@JsonIgnoreProperties("workTimes")
 	private Project project;
 	
 	@ManyToOne
+	@JsonIgnoreProperties("workTimes")
 	private User user;
 }

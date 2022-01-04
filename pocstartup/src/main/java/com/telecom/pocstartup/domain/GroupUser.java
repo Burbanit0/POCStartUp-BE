@@ -37,9 +37,7 @@ public class GroupUser {
 	}
 	
 	public void addUser(User user) {
-		
 		user.setGroupUser(this);
-		
 		this.users.add(user);
 	}
 }

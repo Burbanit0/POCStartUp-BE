@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.telecom.pocstartup.domain.Credential;
 import com.telecom.pocstartup.domain.GroupUser;
 import com.telecom.pocstartup.domain.Project;
 import com.telecom.pocstartup.domain.User;
@@ -35,25 +36,7 @@ public class LoadData {
 	}
 
 	private void initData(UserRepository  userRepository, ProjectRepository projectRepository, WorkTimeRepository workTimeRepository, CredentialRepository credentialRepository, GroupRepository groupRepository) {
-		User user1 = new User();
-		user1.setFirstname("admin");
-		user1.setLastname("adminl");
-		user1.setRole("ADMIN");
-
-		User user2 = new User();
-		user2.setFirstname("manager");
-		user2.setLastname("managerl");
-		user2.setRole("MANAGER");
 		
-		User user3 = new User();
-		user3.setFirstname("user");
-		user3.setLastname("userl");
-		user3.setRole("USER");
-		
-		userRepository.save(user1);
-		userRepository.save(user2);
-		userRepository.save(user3);
-
 		Project project1 = new Project();
 		project1.setName("project1");
 		projectRepository.save(project1);
@@ -62,9 +45,38 @@ public class LoadData {
 		project2.setName("project2");
 		projectRepository.save(project2);
 		
+		Credential c1 = new Credential();
+		c1.setPassword("1111");
+		credentialRepository.save(c1);
+		
+		Credential c2 = new Credential();
+		c2.setPassword("2222");
+		credentialRepository.save(c2);
+		
+		Credential c3 = new Credential();
+		c3.setPassword("3333");
+		credentialRepository.save(c3);
+		
+		User user1 = new User();
+		user1.setFirstname("admin");
+		user1.setLastname("adminl");
+		user1.setRole("ADMIN");
 		user1.addProject(project1);
+		user1.setCredential(c1);
+
+		User user2 = new User();
+		user2.setFirstname("manager");
+		user2.setLastname("managerl");
+		user2.setRole("MANAGER");
 		user2.addProject(project2);
+		user2.setCredential(c2);
+		
+		User user3 = new User();
+		user3.setFirstname("user");
+		user3.setLastname("userl");
+		user3.setRole("USER");
 		user3.addProject(project2);
+		user3.setCredential(c3);
 		
 		userRepository.save(user1);
 		userRepository.save(user2);
@@ -87,6 +99,10 @@ public class LoadData {
 		group.addUser(user2);
 		group.addUser(user3);
 		groupRepository.save(group);
+		
+		userRepository.save(user1);
+		userRepository.save(user2);
+		userRepository.save(user3);
 		
 	};
 	

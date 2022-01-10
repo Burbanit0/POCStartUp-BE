@@ -1,7 +1,9 @@
 package com.telecom.pocstartup.controller;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -31,6 +33,7 @@ import com.telecom.pocstartup.message.response.ResponseMessage;
 import com.telecom.pocstartup.repository.UserRepository;
 import com.telecom.pocstartup.repository.RoleRepository;
 import com.telecom.pocstartup.security.jwt.JwtProvider;
+import com.telecom.pocstartup.security.service.UserDetailsImpl;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -53,7 +56,7 @@ public class AuthRestAPIs {
 	JwtProvider jwtProvider;
 
 	@PostMapping("/signin")
-	public ResponseEntity authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
+	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
 
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -61,9 +64,17 @@ public class AuthRestAPIs {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
 		String jwt = jwtProvider.generateJwtToken(authentication);
-		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		
+	    UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();    
+	    List<String> roles = userDetails.getAuthorities().stream()
+	        .map(item -> item.getAuthority())
+	        .collect(Collectors.toList());
 
-		return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
+	    return ResponseEntity.ok(new JwtResponse(jwt, 
+	                         userDetails.getId(), 
+	                         userDetails.getUsername(), 
+	                         userDetails.getEmail(), 
+	                         roles));
 	}
 
 	@PostMapping("/signup")

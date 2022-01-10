@@ -16,10 +16,10 @@ public class JwtProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtProvider.class);
 
-    @Value("${ozenero.app.jwtSecret}")
+    @Value("${bezkoder.app.jwtSecret}")
     private String jwtSecret;
 
-    @Value("${ozenero.app.jwtExpiration}")
+    @Value("${bezkoder.app.jwtExpirationMs}")
     private int jwtExpiration;
 
     public String generateJwtToken(Authentication authentication) {
@@ -29,7 +29,7 @@ public class JwtProvider {
         return Jwts.builder()
 		                .setSubject((userPrincipal.getUsername()))
 		                .setIssuedAt(new Date())
-		                .setExpiration(new Date((new Date()).getTime() + jwtExpiration*1000))
+		                .setExpiration(new Date((new Date()).getTime() + jwtExpiration))
 		                .signWith(SignatureAlgorithm.HS512, jwtSecret)
 		                .compact();
     }

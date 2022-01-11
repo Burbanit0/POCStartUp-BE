@@ -6,4 +6,6 @@ import com.telecom.pocstartup.domain.Project;
 
 public interface ProjectService {
 	public List<Project> findAllProjects();
+	public Project findProjectById(Long id);
+	public Project createProject(Project project);
 }

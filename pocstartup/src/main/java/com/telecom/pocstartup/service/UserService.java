@@ -6,4 +6,6 @@ import com.telecom.pocstartup.domain.User;
 
 public interface UserService {
 	public List<User> findAllUsers();
+	public User findUserById(Long id);
+	
 }

@@ -18,4 +18,14 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<Project> findAllProjects() {
 		return this.projectRepository.findAll();
 	}
+
+	@Override
+	public Project findProjectById(Long id) {
+		return this.projectRepository.findById(id).orElse(null);
+	}
+
+	@Override
+	public Project createProject(Project project) {
+		return this.projectRepository.save(project);
+	}
 }

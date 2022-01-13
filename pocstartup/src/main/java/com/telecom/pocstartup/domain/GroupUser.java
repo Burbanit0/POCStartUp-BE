@@ -3,6 +3,7 @@ package com.telecom.pocstartup.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -28,13 +29,19 @@ public class GroupUser {
 	private Long id;
 	
 	@OneToOne
+	@JsonIgnoreProperties({"groupUser","password","roles","workTimes","projects","manageGroupUser"})
 	private User manager;
 	
-	@OneToMany(mappedBy="groupUser")
+	@OneToMany(mappedBy="groupUser",fetch=FetchType.EAGER)
+	@JsonIgnoreProperties({"groupUser","password","roles","workTimes","projects","manageGroupUser"})
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
-	@JsonIgnoreProperties({"groupUser","password","roles","workTimes","projects"})
 	private Set<User> users;
+	
+	public void setManager(User manager) {
+		manager.setManageGroupUser(this);
+		this.manager = manager;
+	}
 	
 	public GroupUser() {
 		this.users = new HashSet<>();	

@@ -3,6 +3,7 @@ package com.telecom.pocstartup.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.NaturalId;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
@@ -25,6 +27,7 @@ import lombok.ToString;
 
 @Data
 @Entity
+@JsonFilter("UserFilter")
 public class User {
 
 	@Id
@@ -52,15 +55,21 @@ public class User {
 	@ManyToMany
 	private Set<Role> roles = new HashSet<>();
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user",cascade={CascadeType.ALL})
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	@JsonIgnoreProperties("user")
 	private Set<WorkTime> workTimes;
 
-	@ManyToOne
+	@ManyToOne(cascade={CascadeType.ALL})
+	@EqualsAndHashCode.Exclude
 	@JsonIgnoreProperties("users")
 	private GroupUser groupUser;
+	
+	@OneToOne(mappedBy="manager")
+	@EqualsAndHashCode.Exclude
+	@JsonIgnoreProperties({"users","manager"})
+	private GroupUser manageGroupUser;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@ToString.Exclude

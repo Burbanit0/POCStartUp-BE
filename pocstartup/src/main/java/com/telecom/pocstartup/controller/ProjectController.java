@@ -56,7 +56,7 @@ public class ProjectController {
 	Project addUsers(@PathVariable Long id,@RequestBody ListIds usersIds) {
 		
 		Project project = this.projectService.findProjectById(id);
-		userService.addUsers(usersIds, project);
+		userService.addUsersToProject(usersIds, project);
 		return this.projectService.findProjectById(id);
 	}
 

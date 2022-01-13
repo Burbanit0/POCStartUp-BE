@@ -28,8 +28,7 @@ public class Project {
 	
 	@EqualsAndHashCode.Exclude
 	@ManyToMany(mappedBy = "projects",fetch=FetchType.EAGER)
-//	@JsonIgnoreProperties("projects")
-	@JsonIgnore
+	@JsonIgnoreProperties({"groupUser","password","roles","workTimes","projects"})
 	private Set<User> users;
 	
 	public Project() {

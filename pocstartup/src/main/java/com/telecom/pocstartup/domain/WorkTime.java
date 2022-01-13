@@ -19,10 +19,9 @@ public class WorkTime {
 	private Long duration;
 	
 	@ManyToOne
-	@JsonIgnoreProperties("workTimes")
 	private Project project;
 	
 	@ManyToOne
-	@JsonIgnoreProperties("workTimes")
+	@JsonIgnoreProperties({"groupUser","password","roles","workTimes","projects"})
 	private User user;
 }

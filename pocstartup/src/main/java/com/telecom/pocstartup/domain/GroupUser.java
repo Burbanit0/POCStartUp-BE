@@ -33,7 +33,7 @@ public class GroupUser {
 	@OneToMany(mappedBy="groupUser")
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
-	@JsonIgnoreProperties("groupUser")
+	@JsonIgnoreProperties({"groupUser","password","roles","workTimes","projects"})
 	private Set<User> users;
 	
 	public GroupUser() {

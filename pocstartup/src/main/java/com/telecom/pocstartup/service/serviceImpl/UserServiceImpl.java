@@ -14,16 +14,16 @@ import com.telecom.pocstartup.service.UserService;
 import com.telecom.pocstartup.utils.ListIds;
 
 @Service
-public class UserServiceImpl implements UserService{
-	
+public class UserServiceImpl implements UserService {
+
 	@Autowired
 	private UserRepository userRepository;
-	
-	@Autowired 
+
+	@Autowired
 	GroupRepository groupRepository;
-	
+
 	public List<User> findAllUsers() {
-		
+
 		return this.userRepository.findAll();
 	}
 
@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public Project addUsersToProject(ListIds ids, Project project) {
-		
+
 		for (Long userId : ids.getIds()) {
 			User user = findUserById(userId);
 			if (user != null) {
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService{
 		}
 		return project;
 	}
-	
+
 	@Override
 	public GroupUser addUsersToGroup(ListIds ids, GroupUser group) {
 
@@ -53,11 +53,19 @@ public class UserServiceImpl implements UserService{
 			if (user != null) {
 				group.addUser(user);
 				groupRepository.save(group);
-				
+
 			}
 		}
 		return group;
 
 	}
-		
+
+	@Override
+	public Project deleteUserFromProject(Project project, User user) {
+		project.getUsers().remove(user);
+		user.getProjects().remove(project);
+		userRepository.save(user);
+		return null;
+	}
+
 }

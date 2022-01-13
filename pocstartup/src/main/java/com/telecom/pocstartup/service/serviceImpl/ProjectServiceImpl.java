@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.telecom.pocstartup.domain.Project;
+import com.telecom.pocstartup.domain.User;
 import com.telecom.pocstartup.repository.ProjectRepository;
+import com.telecom.pocstartup.repository.UserRepository;
 import com.telecom.pocstartup.service.ProjectService;
 
 @Service
@@ -14,6 +16,7 @@ public class ProjectServiceImpl implements ProjectService {
 	
 	@Autowired
 	private ProjectRepository projectRepository;
+	
 	
 	public List<Project> findAllProjects() {
 		return this.projectRepository.findAll();
@@ -28,4 +31,5 @@ public class ProjectServiceImpl implements ProjectService {
 	public Project createProject(Project project) {
 		return this.projectRepository.save(project);
 	}
+
 }

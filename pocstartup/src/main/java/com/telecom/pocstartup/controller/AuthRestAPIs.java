@@ -78,7 +78,7 @@ public class AuthRestAPIs {
 	}
 
 	@PostMapping("/signup")
-	public ResponseEntity registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
+	public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
 			return new ResponseEntity<>(new ResponseMessage("Fail -> username is already in use!"),
 					HttpStatus.BAD_REQUEST);

@@ -12,4 +12,5 @@ public interface UserService {
 	public User findUserById(Long id);
 	public Project addUsersToProject(ListIds ids, Project project);
 	public GroupUser addUsersToGroup(ListIds ids,GroupUser group);
+	public Project deleteUserFromProject(Project project,User user);
 }

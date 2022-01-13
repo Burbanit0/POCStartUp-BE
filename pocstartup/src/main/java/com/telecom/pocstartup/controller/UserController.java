@@ -52,6 +52,9 @@ public class UserController {
 
 	@GetMapping("/users/{idUser}/projects/{idProject}")
 	Project findProjectsById(@PathVariable("idUser") Long idUser, @PathVariable("idProject") Long idProject) {
+		
+		FilterProvider filters = new SimpleFilterProvider().addFilter("apiFilter", SimpleBeanPropertyFilter.serializeAllExcept(""));
+		
 		Project project = this.projectService.findProjectById(idProject);
 		if (project.getUsers().contains(userService.findUserById(idUser))) {
 			return project;
@@ -81,7 +84,7 @@ public class UserController {
 		}
 		GroupUser groupuser = userService.findUserById(idManager).getManageGroupUser(); 
 		
-	    SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("name", "username","email");
+	    SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("id","name", "username","email");
 	    FilterProvider filters = new SimpleFilterProvider().addFilter("UserFilter", filter);
 	    MappingJacksonValue mapping = new MappingJacksonValue(groupuser.getUsers());
 	    mapping.setFilters(filters);

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,6 +28,7 @@ import com.telecom.pocstartup.service.UserService;
 import com.telecom.pocstartup.utils.ListIds;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class ProjectController {
 
 	@Autowired
@@ -35,6 +37,7 @@ public class ProjectController {
 	@Autowired
 	private UserService userService;
 
+	
 	@GetMapping("/projects")
 	List<Project> findAllProjects() {
 		return this.projectService.findAllProjects();

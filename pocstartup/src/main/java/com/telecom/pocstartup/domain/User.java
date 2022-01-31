@@ -62,11 +62,13 @@ public class User {
 	private Set<WorkTime> workTimes;
 
 	@ManyToOne(cascade={CascadeType.ALL})
+	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	@JsonIgnoreProperties("users")
 	private GroupUser groupUser;
 	
 	@OneToOne(mappedBy="manager")
+	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	@JsonIgnoreProperties({"users","manager"})
 	private GroupUser manageGroupUser;

@@ -1,5 +1,7 @@
 package com.telecom.pocstartup.domain;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,9 +18,12 @@ public class WorkTime {
 	@GeneratedValue
 	private Long id;
 	
+	private LocalDate date;
+	
 	private Long duration;
 	
 	@ManyToOne
+	@JsonIgnoreProperties("users")
 	private Project project;
 	
 	@ManyToOne

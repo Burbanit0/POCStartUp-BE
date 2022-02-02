@@ -56,26 +56,26 @@ public class User {
 	private Set<Role> roles = new HashSet<>();
 
 	@OneToMany(mappedBy = "user",cascade={CascadeType.ALL})
-	@ToString.Exclude
-	@EqualsAndHashCode.Exclude
+//	@ToString.Exclude
+//	@EqualsAndHashCode.Exclude
 	@JsonIgnoreProperties("user")
 	private Set<WorkTime> workTimes;
 
 	@ManyToOne(cascade={CascadeType.ALL})
-	@ToString.Exclude
-	@EqualsAndHashCode.Exclude
+//	@ToString.Exclude
+//	@EqualsAndHashCode.Exclude
 	@JsonIgnoreProperties("users")
 	private GroupUser groupUser;
 	
 	@OneToOne(mappedBy="manager")
-	@ToString.Exclude
-	@EqualsAndHashCode.Exclude
+//	@ToString.Exclude
+//	@EqualsAndHashCode.Exclude
 	@JsonIgnoreProperties({"users","manager"})
 	private GroupUser manageGroupUser;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	@ToString.Exclude
-	@EqualsAndHashCode.Exclude
+//	@ToString.Exclude
+//	@EqualsAndHashCode.Exclude
 	@JsonIgnoreProperties("users")
 	private Set<Project> projects;
 

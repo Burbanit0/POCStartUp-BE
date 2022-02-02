@@ -6,4 +6,5 @@ import com.telecom.pocstartup.domain.WorkTime;
 
 public interface WorkTimeService {
 	public List<WorkTime> findAllWorktimes();
+	public WorkTime createWorkTime(WorkTime worktime);
 }

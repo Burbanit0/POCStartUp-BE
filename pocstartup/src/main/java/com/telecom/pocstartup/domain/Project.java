@@ -27,11 +27,17 @@ public class Project {
 	private String name;
 	
 	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
 	@ManyToMany(mappedBy = "projects",fetch=FetchType.EAGER)
 	@JsonIgnoreProperties({"groupUser","password","roles","workTimes","projects","manageGroupUser"})
 	private Set<User> users;
 	
 	public Project() {
 		this.users = new HashSet<>();
+	}
+	
+	public void addUser(User user) {
+		user.getProjects().add(this);
+		this.users.add(user);
 	}
 }

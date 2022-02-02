@@ -30,6 +30,8 @@ public class GroupUser {
 	
 	@OneToOne
 	@JsonIgnoreProperties({"groupUser","password","roles","workTimes","projects","manageGroupUser"})
+	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
 	private User manager;
 	
 	@OneToMany(mappedBy="groupUser",fetch=FetchType.EAGER)

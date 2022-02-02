@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -24,9 +26,13 @@ public class WorkTime {
 	
 	@ManyToOne
 	@JsonIgnoreProperties("users")
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
 	private Project project;
 	
 	@ManyToOne
 	@JsonIgnoreProperties({"groupUser","password","roles","workTimes","projects"})
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
 	private User user;
 }

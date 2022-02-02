@@ -20,4 +20,9 @@ public class WorkTimeServiceImpl implements WorkTimeService {
 	public List<WorkTime> findAllWorktimes() {
 		return this.worktimeRepository.findAll();
 	}
+
+	@Override
+	public WorkTime createWorkTime(WorkTime worktime) {
+		return worktimeRepository.save(worktime);
+	}
 }

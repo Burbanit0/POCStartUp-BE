@@ -20,9 +20,11 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.telecom.pocstartup.domain.GroupUser;
 import com.telecom.pocstartup.domain.Project;
 import com.telecom.pocstartup.domain.User;
+import com.telecom.pocstartup.domain.WorkTime;
 import com.telecom.pocstartup.service.GroupUserService;
 import com.telecom.pocstartup.service.ProjectService;
 import com.telecom.pocstartup.service.UserService;
+import com.telecom.pocstartup.service.WorkTimeService;
 import com.telecom.pocstartup.utils.ListIds;
 
 
@@ -38,6 +40,9 @@ public class UserController {
 
 	@Autowired
 	private GroupUserService groupuserService;
+	
+	@Autowired
+	private WorkTimeService worktimeService;
 
 	@GetMapping("/users")
 	List<User> findAllUsers() {
@@ -45,13 +50,14 @@ public class UserController {
 	}
 
 	@GetMapping("/users/{id}")
-	User findUserById(@PathVariable Long id) {
-		return this.findUserById(id);
+	User findUser(@PathVariable Long id) {
+		User user = userService.findUserById(id);
+		return user;
 	}
 
 	@GetMapping("/users/{id}/projects")
 	Set<Project> findProjects(@PathVariable Long id) {
-		return this.findUserById(id).getProjects();
+		return userService.findUserById(id).getProjects();
 	}
 
 	@GetMapping("/users/{idUser}/projects/{idProject}")
@@ -112,4 +118,5 @@ public class UserController {
 
 	}
 	
+
 }

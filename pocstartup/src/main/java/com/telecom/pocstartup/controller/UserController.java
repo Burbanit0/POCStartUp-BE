@@ -25,7 +25,7 @@ import com.telecom.pocstartup.service.ProjectService;
 import com.telecom.pocstartup.service.UserService;
 import com.telecom.pocstartup.utils.ListIds;
 
-@CrossOrigin(origins = "http://localhost:4200")
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {

@@ -20,7 +20,7 @@ public class WorkTime {
 	@GeneratedValue
 	private Long id;
 	
-	private LocalDate date;
+	private String date;
 	
 	private Long duration;
 	

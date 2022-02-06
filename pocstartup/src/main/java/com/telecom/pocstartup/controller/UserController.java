@@ -3,6 +3,8 @@ package com.telecom.pocstartup.controller;
 import java.util.List;
 import java.util.Set;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +21,7 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.telecom.pocstartup.domain.GroupUser;
 import com.telecom.pocstartup.domain.Project;
+import com.telecom.pocstartup.domain.Role;
 import com.telecom.pocstartup.domain.User;
 import com.telecom.pocstartup.domain.WorkTime;
 import com.telecom.pocstartup.service.GroupUserService;
@@ -115,6 +118,26 @@ public class UserController {
 		GroupUser groupuser = manager.getManageGroupUser();
 		userService.addUsersToGroup(usersIds, groupuser);
 		return groupuser;
+
+	}
+	
+	@PatchMapping("/users/{id}")
+	User changeUserRole(@PathVariable("id") Long id,@Valid @RequestBody String role) {
+
+		User user = userService.findUserById(id);
+		switch (role){
+		case "ROLE_USER" : {
+			//user.setRoles(role);
+			
+		}
+		case "ROLE_MANAGER" : {
+			
+		}
+		case "ROLE_ADMIN" : {
+			
+		}
+		}
+		return null;
 
 	}
 	

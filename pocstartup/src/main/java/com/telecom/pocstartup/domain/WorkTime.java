@@ -22,7 +22,7 @@ public class WorkTime {
 	
 	private String date;
 	
-	private Long duration;
+	private float duration;
 	
 	@ManyToOne
 	@JsonIgnoreProperties("users")

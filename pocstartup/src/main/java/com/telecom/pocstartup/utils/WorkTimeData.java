@@ -6,6 +6,6 @@ import lombok.Data;
 
 @Data
 public class WorkTimeData {
-	private String  date;
-	private Long duration;
+	private String date;
+	private float duration;
 }

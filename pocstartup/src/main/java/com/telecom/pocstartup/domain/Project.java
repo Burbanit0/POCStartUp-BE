@@ -26,6 +26,8 @@ public class Project {
 	
 	private String name;
 	
+	private String description;
+	
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	@ManyToMany(mappedBy = "projects",fetch=FetchType.EAGER)

@@ -1,5 +1,6 @@
 package com.telecom.pocstartup.controller;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -29,6 +30,7 @@ import com.telecom.pocstartup.service.ProjectService;
 import com.telecom.pocstartup.service.UserService;
 import com.telecom.pocstartup.service.WorkTimeService;
 import com.telecom.pocstartup.utils.ListIds;
+import com.telecom.pocstartup.utils.UserData;
 
 
 @RestController
@@ -122,22 +124,44 @@ public class UserController {
 	}
 	
 	@PatchMapping("/users/{id}")
-	User changeUserRole(@PathVariable("id") Long id,@Valid @RequestBody String role) {
+	User changeUserRole(@PathVariable("id") Long id,@Valid @RequestBody UserData role) {
 
-		User user = userService.findUserById(id);
-		switch (role){
+		User currentUser = userService.findUserById(id);
+		Role myRole = new Role();
+		
+		Set roles = new HashSet();
+		System.out.println(role);
+		System.out.println(roles);
+		
+		switch (role.getRole()){
 		case "ROLE_USER" : {
-			//user.setRoles(role);
+			
+			myRole.setId(1L);
+			roles.add(myRole);
+			currentUser.setManageGroupUser(null);
+			break;
 			
 		}
 		case "ROLE_MANAGER" : {
+			myRole.setId(2L);
+			roles.add(myRole);
+			currentUser.setGroupUser(null);
+			break;
 			
 		}
 		case "ROLE_ADMIN" : {
+			myRole.setId(3L);
+			roles.add(myRole);
+			currentUser.setGroupUser(null);
+			break;
 			
 		}
+		default : {
+			return null;
 		}
-		return null;
+		}
+		currentUser.setRoles(roles);
+		return userService.changeRole(currentUser);
 
 	}
 	

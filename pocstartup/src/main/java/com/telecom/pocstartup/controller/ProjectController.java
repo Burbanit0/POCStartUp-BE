@@ -79,7 +79,6 @@ public class ProjectController {
 		} catch (Exception ex) {
 			return new ResponseEntity<>(new ResponseMessage("fail"), HttpStatus.BAD_REQUEST);
 		}
-
 	}
 
 }

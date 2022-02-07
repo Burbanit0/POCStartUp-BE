@@ -56,7 +56,7 @@ public class WorkTimeController {
 		return wtForProject;
 	}
 	
-	@GetMapping("/users/{id}/worktimes")
+	@GetMapping("/users/{idUser}/worktimes")
 	Set<WorkTime> getWorkTimes(@PathVariable("idUser") Long idUser) {
 		User user = userService.findUserById(idUser);
 		return user.getWorkTimes();
